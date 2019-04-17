@@ -153,11 +153,11 @@ def dataParser(usgs_geo_data):
              ++ sjgWeakStormCount
          else if sjg_list.append(sjg_value) > -30 | < -9:
              ++ sjgBelowAverageCount 
-         else if hon_list.append(sjg_value) > -10 | < 11:
+         else if sjg_list.append(sjg_value) > -10 | < 11:
              ++ sjgAverageCount
-         else if hon_list.append(sjg_value) > 10 | < 31:
+         else if sjg_list.append(sjg_value) > 10 | < 31:
              ++ sjgAboveAverageCount
-         else if hon_list.append(sjg_value) > 30 | < 39:
+         else if sjg_list.append(sjg_value) > 30 | < 39:
              ++ sjgFarAboveAverageCount
          else sjg_list.append(sjg_value) > 38:
              ++ sjgAbove38Count
