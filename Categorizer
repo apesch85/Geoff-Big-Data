@@ -103,66 +103,122 @@ def dataParser(usgs_geo_data):
         else:
             bad_sjg.append(sjg_value)
 
+            
   # Categorizer      
 
+  dstSuperstormCount = []
+  dstIntenseStormCount = []
+  dstModerateStormCount = []
+  dstWeakStormCount = []
+  dstBelowAverageCount = []
+  dstAverageCount = []
+  dstAboveAverageCount = []
+  dstFarAboveAverageCount = []
+  dstAbove38Count = []
+  honSuperstormCount = []
+  honIntenseStormCount = []
+  honModerateStormCount = []
+  honWeakStormCount = []
+  honBelowAverageCount = []
+  honAverageCount = []
+  honAboveAverageCount = []
+  honFarAboveAverageCount = []
+  honAbove38Count = []
+  sjgSuperstormCount = []
+  sjgIntenseStormCount = []
+  sjgModerateStormCount = []
+  sjgWeakStormCount = []
+  sjgBelowAverageCount = []
+  sjgAverageCount = []
+  sjgAboveAverageCount = []
+  sjgFarAboveAverageCount = []
+  sjgAbove38Count = []
+  
          if dst_list.append(dst_value) < -250:
-             ++ dstSuperstormCount
+             += dstSuperstormCount
          else if dst_list.append(dst_value) > -251 | < -100:
-             ++ dstIntenseStormCount
+             += dstIntenseStormCount
          else if dst_list.append(dst_value) > -101 | < -49:
-             ++ dstModerateStormCount
+             += dstModerateStormCount
          else if dst_list.append(dst_value) > -50 | < -29:
-             ++ dstWeakStormCount
+             += dstWeakStormCount
          else if dst_list.append(dst_value) > -30 | < -9:
-             ++ dstBelowAverageCount 
+             += dstBelowAverageCount 
          else if dst_list.append(dst_value) > -10 | < 11:
-             ++ dstAverageCount
+             += dstAverageCount
          else if dst_list.append(dst_value) > 10 | < 31:
-             ++ dstAboveAverageCount
+             += dstAboveAverageCount
          else if dst_list.append(dst_value) > 30 | < 39:
-             ++ dstFarAboveAverageCount
+             += dstFarAboveAverageCount
          else dst_list.append(dst_value) > 38:
-             ++ dstAbove38Count
+             += dstAbove38Count
 
          if hon_list.append(hon_value) < -250:
-             ++ honSuperstormCount
+             += honSuperstormCount
          else if hon_list.append(hon_value) > -251 | < -100:
-             ++ honIntenseStormCount
+             += honIntenseStormCount
          else if hon_list.append(hon_value) > -101 | < -49:
-             ++ honModerateStormCount
+             += honModerateStormCount
          else if hon_list.append(hon_value) > -50 | < -29:
-             ++ honWeakStormCount
+             += honWeakStormCount
          else if hon_list.append(hon_value) > -30 | < -9:
-             ++ honBelowAverageCount 
+             += honBelowAverageCount 
          else if hon_list.append(hon_value) > -10 | < 11:
-             ++ honAverageCount
+             += honAverageCount
          else if hon_list.append(hon_value) > 10 | < 31:
-             ++ honAboveAverageCount
+             += honAboveAverageCount
          else if hon_list.append(hon_value) > 30 | < 39:
-             ++ honFarAboveAverageCount
+             += honFarAboveAverageCount
          else hon_list.append(hon_value) > 38:
-             ++ honAbove38Count
+             += honAbove38Count
 
          if sjg_list.append(sjg_value) < -250:
-             ++ sjgSuperstormCount
+             += sjgSuperstormCount
          else if sjg_list.append(sjg_value) > -251 | < -100:
-             ++ sjgIntenseStormCount
+             += sjgIntenseStormCount
          else if sjg_list.append(sjg_value) > -101 | < -49:
-             ++ sjgModerateStormCount
+             += sjgModerateStormCount
          else if sjg_list.append(sjg_value) > -50 | < -29:
-             ++ sjgWeakStormCount
+             += sjgWeakStormCount
          else if sjg_list.append(sjg_value) > -30 | < -9:
-             ++ sjgBelowAverageCount 
+             += sjgBelowAverageCount 
          else if sjg_list.append(sjg_value) > -10 | < 11:
-             ++ sjgAverageCount
+             += sjgAverageCount
          else if sjg_list.append(sjg_value) > 10 | < 31:
-             ++ sjgAboveAverageCount
+             += sjgAboveAverageCount
          else if sjg_list.append(sjg_value) > 30 | < 39:
-             ++ sjgFarAboveAverageCount
+             += sjgFarAboveAverageCount
          else sjg_list.append(sjg_value) > 38:
-             ++ sjgAbove38Count
+             += sjgAbove38Count
+            
+    print('\n Average Dst Super-storms: %s' % dstSuperstormCount)
+    print('Average Dst Intense Storm Count: %s' % dstIntenseStormCount)
+    print('Average Dst Moderate Storm Count: %s' % dstModerateStormCount)
+    print('Average Dst Weak Storm Count: %s' % dstWeakStormCount)
+    print('Average Dst Moderate Storm Count: %s' % dstBelowAverageCount)
+    print('Average Dst Moderate Storm Count: %s' % dstAverageCount)
+    print('Average Dst Moderate Storm Count: %s' % dstAboveAverageCount)
+    print('Average Dst Moderate Storm Count: %s' % dstAbove38Count)
 
+    print('\n Average HON Super-storms: %s' % honSuperstormCount)
+    print('Average HON Intense Storm Count: %s' % honIntenseStormCount)
+    print('Average HON Moderate Storm Count: %s' % honModerateStormCount)
+    print('Average HON Weak Storm Count: %s' % honWeakStormCount)
+    print('Average HON Moderate Storm Count: %s' % honBelowAverageCount)
+    print('Average HON Moderate Storm Count: %s' % honAverageCount)
+    print('Average HON Moderate Storm Count: %s' % honAboveAverageCount)
+    print('Average HON Moderate Storm Count: %s' % honAbove38Count)
 
+    print('\n Average SJG Super-storms: %s' % sjgSuperstormCount)
+    print('Average SJG Intense Storm Count: %s' % sjgIntenseStormCount)
+    print('Average SJG Moderate Storm Count: %s' % sjgModerateStormCount)
+    print('Average SJG Weak Storm Count: %s' % sjgWeakStormCount)
+    print('Average SJG Moderate Storm Count: %s' % sjgBelowAverageCount)
+    print('Average SJG Moderate Storm Count: %s' % sjgAverageCount)
+    print('Average SJG Moderate Storm Count: %s' % sjgAboveAverageCount)
+    print('Average SJG Moderate Storm Count: %s' % sjgAbove38Count)
+
+    
   # Other Table Values
     print('\nDST max: %s' % max(dst_list))
     print('HON max: %s' % max(hon_list))
