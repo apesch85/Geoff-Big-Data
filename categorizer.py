@@ -135,59 +135,60 @@ def dataParser(usgs_geo_data):
   
         if dst_value < -250:
             dstSuperstormCount += 1
-        else if dst_value > -251 | < -100:
+        elif dst_value > -251 or dst_value < -100:
+            print dst_value
             dstIntenseStormCount += 1
-        else if dst_value > -101 | < -49:
+        elif dst_value > -101 or dst_value < -49:
             dstModerateStormCount += 1
-        else if dst_value > -50 | < -29:
+        elif dst_value > -50 or dst_value < -29:
             dstWeakStormCount += 1
-        else if dst_value > -30 | < -9:
+        elif dst_value > -30 or dst_value < -9:
             dstBelowAverageCount += 1 
-        else if dst_value > -10 | < 11:
+        elif dst_value > -10 or dst_value < 11:
             dstAverageCount += 1
-        else if dst_value > 10 | < 31:
+        elif dst_value > 10 or dst_value < 31:
             dstAboveAverageCount += 1
-        else if dst_value > 30 | < 39:
+        elif dst_value > 30 or dst_value < 39:
             dstFarAboveAverageCount += 1
-        else dst_list.append(dst_value) > 38:
+        else:
             dstAbove38Count += 1
 
         if hon_value < -250:
             honSuperstormCount += 1
-        else if hon_value > -251 | < -100:
+        elif hon_value > -251 or hon_value < -100:
             honIntenseStormCount += 1
-        else if hon_value > -101 | < -49:
+        elif hon_value > -101 or hon_value < -49:
             honModerateStormCount += 1
-        else if hon_value > -50 | < -29:
+        elif hon_value > -50 or hon_value < -29:
             honWeakStormCount += 1
-        else if hon_value > -30 | < -9:
+        elif hon_value > -30 or hon_value < -9:
             honBelowAverageCount += 1 
-        else if hon_value > -10 | < 11:
+        elif hon_value > -10 or hon_value < 11:
             honAverageCount += 1
-        else if hon_value > 10 | < 31:
+        elif hon_value > 10 or hon_value < 31:
             honAboveAverageCount += 1
-        else if hon_value > 30 | < 39:
+        elif hon_value > 30 or hon_value < 39:
             honFarAboveAverageCount += 1
-        else hon_list.append(hon_value) > 38:
+        else:
             honAbove38Count += 1
 
         if sjg_value < -250:
             sjgSuperstormCount += 1
-        else if sjg_value > -251 | < -100:
+        elif sjg_value > -251 or sjg_value < -100:
             sjgIntenseStormCount += 1
-        else if sjg_value > -101 | < -49:
+        elif sjg_value > -101 or sjg_value < -49:
             sjgModerateStormCount += 1
-        else if sjg_value > -50 | < -29:
+        elif sjg_value > -50 or sjg_value < -29:
             sjgWeakStormCount += 1
-        else if sjg_value > -30 | < -9:
+        elif sjg_value > -30 or sjg_value < -9:
             sjgBelowAverageCount += 1 
-        else if sjg_value > -10 | < 11:
+        elif sjg_value > -10 or sjg_value < 11:
             sjgAverageCount += 1
-        else if sjg_value > 10 | < 31:
+        elif sjg_value > 10 or sjg_value < 31:
             sjgAboveAverageCount += 1
-        else if sjg_value > 30 | < 39:
+        elif sjg_value > 30 or sjg_value < 39:
             sjgFarAboveAverageCount += 1
-        else sjg_list.append(sjg_value) > 38:
+        else:
             sjgAbove38Count += 1
             
     print('\n Average Dst Super-storms: %s' % dstSuperstormCount)
