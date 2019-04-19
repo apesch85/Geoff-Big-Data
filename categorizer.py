@@ -5,7 +5,6 @@ import csv
 from os import path
 import re
 
-
 error_message = ('Please provide full filepath to USGS Geomagnetism file as an '
                  'argument to be parsed.\n Example: "python data_averager.py '
               '/path/to/file"')
@@ -82,33 +81,9 @@ def dataParser(usgs_geo_data):
     bad_hon = []
     bad_sjg = []
 
-    dstSuperstormCount = 0
-    dstIntenseStormCount = 0
-    dstModerateStormCount = 0
-    dstWeakStormCount = 0
-    dstBelowAverageCount = 0
-    dstAverageCount = 0
-    dstAboveAverageCount = 0
-    dstFarAboveAverageCount = 0
-    dstAbove38Count = 0
-    honSuperstormCount = 0
-    honIntenseStormCount = 0
-    honModerateStormCount = 0
-    honWeakStormCount = 0
-    honBelowAverageCount = 0
-    honAverageCount = 0
-    honAboveAverageCount = 0
-    honFarAboveAverageCount = 0
-    honAbove38Count = 0
-    sjgSuperstormCount = 0
-    sjgIntenseStormCount = 0
-    sjgModerateStormCount = 0
-    sjgWeakStormCount = 0
-    sjgBelowAverageCount = 0
-    sjgAverageCount = 0
-    sjgAboveAverageCount = 0
-    sjgFarAboveAverageCount = 0
-    sjgAbove38Count = 0
+    dst_data = {}
+    hon_data = {}
+    sjg_data = {}
 
     just_data = usgs_geo_data[1:] # Remove header, leaving just data.
 
@@ -133,92 +108,47 @@ def dataParser(usgs_geo_data):
         
         # Categorizer      
   
-        if dst_value < -250:
-            dstSuperstormCount += 1
-        elif dst_value > -251 or dst_value < -100:
-            print dst_value
-            dstIntenseStormCount += 1
-        elif dst_value > -101 or dst_value < -49:
-            dstModerateStormCount += 1
-        elif dst_value > -50 or dst_value < -29:
-            dstWeakStormCount += 1
-        elif dst_value > -30 or dst_value < -9:
-            dstBelowAverageCount += 1 
-        elif dst_value > -10 or dst_value < 11:
-            dstAverageCount += 1
-        elif dst_value > 10 or dst_value < 31:
-            dstAboveAverageCount += 1
-        elif dst_value > 30 or dst_value < 39:
-            dstFarAboveAverageCount += 1
-        else:
-            dstAbove38Count += 1
+        value_list = [dst_value, hon_value, sjg_value]
+        value_count_list = [dst_data, hon_data, sjg_data]
+        data_name = ['dst', 'hon', 'sjg']
 
-        if hon_value < -250:
-            honSuperstormCount += 1
-        elif hon_value > -251 or hon_value < -100:
-            honIntenseStormCount += 1
-        elif hon_value > -101 or hon_value < -49:
-            honModerateStormCount += 1
-        elif hon_value > -50 or hon_value < -29:
-            honWeakStormCount += 1
-        elif hon_value > -30 or hon_value < -9:
-            honBelowAverageCount += 1 
-        elif hon_value > -10 or hon_value < 11:
-            honAverageCount += 1
-        elif hon_value > 10 or hon_value < 31:
-            honAboveAverageCount += 1
-        elif hon_value > 30 or hon_value < 39:
-            honFarAboveAverageCount += 1
-        else:
-            honAbove38Count += 1
+        for value in value_list:
+            item_pos = value_list.index(value)
+            if len(value_count_list[item_pos]) == 0:
+                value_count_list[item_pos]['%s super_storm_count' % data_name[item_pos]] = 0
+                value_count_list[item_pos]['%s intense_storm_count' % data_name[item_pos]] = 0
+                value_count_list[item_pos]['%s moderate_storm_count' % data_name[item_pos]] = 0
+                value_count_list[item_pos]['%s weak_storm_count' % data_name[item_pos]] = 0
+                value_count_list[item_pos]['%s below_avg_storm_count' % data_name[item_pos]] = 0
+                value_count_list[item_pos]['%s avg_storm_count' % data_name[item_pos]] = 0
+                value_count_list[item_pos]['%s above_avg_storm_count' % data_name[item_pos]] = 0
+                value_count_list[item_pos]['%s far_above_avg_storm_count' % data_name[item_pos]] = 0
+                value_count_list[item_pos]['%s above_38_count' % data_name[item_pos]] = 0
 
-        if sjg_value < -250:
-            sjgSuperstormCount += 1
-        elif sjg_value > -251 or sjg_value < -100:
-            sjgIntenseStormCount += 1
-        elif sjg_value > -101 or sjg_value < -49:
-            sjgModerateStormCount += 1
-        elif sjg_value > -50 or sjg_value < -29:
-            sjgWeakStormCount += 1
-        elif sjg_value > -30 or sjg_value < -9:
-            sjgBelowAverageCount += 1 
-        elif sjg_value > -10 or sjg_value < 11:
-            sjgAverageCount += 1
-        elif sjg_value > 10 or sjg_value < 31:
-            sjgAboveAverageCount += 1
-        elif sjg_value > 30 or sjg_value < 39:
-            sjgFarAboveAverageCount += 1
-        else:
-            sjgAbove38Count += 1
-            
-    print('\n Average Dst Super-storms: %s' % dstSuperstormCount)
-    print('Average Dst Intense Storm Count: %s' % dstIntenseStormCount)
-    print('Average Dst Moderate Storm Count: %s' % dstModerateStormCount)
-    print('Average Dst Weak Storm Count: %s' % dstWeakStormCount)
-    print('Average Dst Below Average Count: %s' % dstBelowAverageCount)
-    print('Average Dst Average Count: %s' % dstAverageCount)
-    print('Average Dst Above Average Count: %s' % dstAboveAverageCount)
-    print('Average Dst Above 38 Count: %s' % dstAbove38Count)
+            if value < -250:
+                value_count_list[item_pos]['%s super_storm_count' % data_name[item_pos]] += 1
+            elif -100 > value >= -250:
+                value_count_list[item_pos]['%s intense_storm_count' % data_name[item_pos]] += 1
+            elif -40 > value > -101:
+                value_count_list[item_pos]['%s moderate_storm_count' % data_name[item_pos]] += 1
+            elif -29 > value > -50:
+                value_count_list[item_pos]['%s weak_storm_count' % data_name[item_pos]] += 1
+            elif -9 > value > -30:
+                value_count_list[item_pos]['%s below_avg_storm_count' % data_name[item_pos]] += 1 
+            elif 11 > value > -10:
+                value_count_list[item_pos]['%s avg_storm_count' % data_name[item_pos]] += 1
+            elif 31 > value > 10:
+                value_count_list[item_pos]['%s above_avg_storm_count' % data_name[item_pos]] += 1
+            elif 39 > value > 30:
+                value_count_list[item_pos]['%s far_above_avg_storm_count' % data_name[item_pos]] += 1
+            else:
+                value_count_list[item_pos]['%s above_38_count' % data_name[item_pos]] += 1
 
-    print('\n Average HON Super-storms: %s' % honSuperstormCount)
-    print('Average HON Intense Storm Count: %s' % honIntenseStormCount)
-    print('Average HON Moderate Storm Count: %s' % honModerateStormCount)
-    print('Average HON Weak Storm Count: %s' % honWeakStormCount)
-    print('Average HON Below Average Count: %s' % honBelowAverageCount)
-    print('Average HON Average Count: %s' % honAverageCount)
-    print('Average HON Above Average Count: %s' % honAboveAverageCount)
-    print('Average HON Above 38 Count: %s' % honAbove38Count)
+    for data_dict in value_count_list:
+        print '\n'
+        for data_point, data_measure in data_dict.iteritems():
+            print('%s: %s' % (data_point, str(data_measure)))
 
-    print('\n Average SJG Super-storms: %s' % sjgSuperstormCount)
-    print('Average SJG Intense Storm Count: %s' % sjgIntenseStormCount)
-    print('Average SJG Moderate Storm Count: %s' % sjgModerateStormCount)
-    print('Average SJG Weak Storm Count: %s' % sjgWeakStormCount)
-    print('Average SJG Below Average Count: %s' % sjgBelowAverageCount)
-    print('Average SJG Average Count: %s' % sjgAverageCount)
-    print('Average SJG Above Average Count: %s' % sjgAboveAverageCount)
-    print('Average SJG Above 38 Count: %s' % sjgAbove38Count)
-
-    
     # Other Table Values
 
     print('\nDST max: %s' % max(dst_list))
