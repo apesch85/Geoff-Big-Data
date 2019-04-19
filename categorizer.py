@@ -129,7 +129,7 @@ def dataParser(usgs_geo_data):
                 value_count_list[item_pos]['%s super_storm_count' % data_name[item_pos]] += 1
             elif -100 > value >= -250:
                 value_count_list[item_pos]['%s intense_storm_count' % data_name[item_pos]] += 1
-            elif -40 > value > -101:
+            elif -49 >= value > -101:
                 value_count_list[item_pos]['%s moderate_storm_count' % data_name[item_pos]] += 1
             elif -29 > value > -50:
                 value_count_list[item_pos]['%s weak_storm_count' % data_name[item_pos]] += 1
