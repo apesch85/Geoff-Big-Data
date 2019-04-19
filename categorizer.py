@@ -106,23 +106,23 @@ def dataParser(usgs_geo_data):
         else:
             bad_sjg.append(sjg_value)
         
-        # Categorizer      
-        #
-        # Establishing 3 lists:
-        #
-        # value_list: A list of the values defined in the loop above that we can
-        #   iterate over in a predictable manner.
-        #
-        # value_count_list: A list of dictionaries containing the following -
-        #   key: The storm type
-        #   value: The count for that storm type
-        #
-        # data_name: A list of strings representing the names of the data points
-        #
-        # These lists help us keep our code at a minimum, reducing the line count
-        # by 70 lines - see the commit below to see the difference this logic makes.
-        #
-        # https://github.com/peschpit-enterprises/Geoff-Big-Data/compare/5a93c4936aeb...dc1b344c4b8e
+    # Categorizer      
+    #
+    # Establishing 3 lists:
+    #
+    # value_list_of_lists: A list of the values defined in the loop above that we can
+    #   iterate over in a predictable manner.
+    #
+    # value_data_list: A list of dictionaries containing the following -
+    #   key: The storm type
+    #   value: The count for that storm type
+    #
+    # data_name: A list of strings representing the names of the data points
+    #
+    # These lists help us keep our code at a minimum, reducing the line count
+    # by 70 lines - see the commit below to see the difference this logic makes.
+    #
+    # https://github.com/peschpit-enterprises/Geoff-Big-Data/compare/5a93c4936aeb...dc1b344c4b8e
 
     value_data_list = [dst_data, hon_data, sjg_data]
     value_list_of_lists = [dst_list, hon_list, sjg_list]
