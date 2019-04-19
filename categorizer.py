@@ -107,7 +107,23 @@ def dataParser(usgs_geo_data):
             bad_sjg.append(sjg_value)
         
         # Categorizer      
-  
+        #
+        # Establishing 3 lists:
+        #
+        # value_list: A list of the values defined in the loop above that we can
+        #   iterate over in a predictable manner.
+        #
+        # value_count_list: A list of dictionaries containing the following -
+        #   key: The storm type
+        #   value: The count for that storm type
+        #
+        # data_name: A list of strings representing the names of the data points
+        #
+        # These lists help us keep our code at a minimum, reducing the line count
+        # by 70 lines - see the commit below to see the difference this logic makes.
+        #
+        # https://github.com/peschpit-enterprises/Geoff-Big-Data/compare/5a93c4936aeb...dc1b344c4b8e
+
         value_list = [dst_value, hon_value, sjg_value]
         value_count_list = [dst_data, hon_data, sjg_data]
         data_name = ['dst', 'hon', 'sjg']
@@ -129,17 +145,17 @@ def dataParser(usgs_geo_data):
                 value_count_list[item_pos]['%s super_storm_count' % data_name[item_pos]] += 1
             elif -100 > value >= -250:
                 value_count_list[item_pos]['%s intense_storm_count' % data_name[item_pos]] += 1
-            elif -49 >= value > -101:
+            elif -49 > value >= -100:
                 value_count_list[item_pos]['%s moderate_storm_count' % data_name[item_pos]] += 1
-            elif -29 > value > -50:
+            elif -29 > value >= -49:
                 value_count_list[item_pos]['%s weak_storm_count' % data_name[item_pos]] += 1
-            elif -9 > value > -30:
+            elif -9 > value >= -29:
                 value_count_list[item_pos]['%s below_avg_storm_count' % data_name[item_pos]] += 1 
-            elif 11 > value > -10:
+            elif 11 > value >= -9:
                 value_count_list[item_pos]['%s avg_storm_count' % data_name[item_pos]] += 1
-            elif 31 > value > 10:
+            elif 31 > value >= 11:
                 value_count_list[item_pos]['%s above_avg_storm_count' % data_name[item_pos]] += 1
-            elif 39 > value > 30:
+            elif 39 > value >= 31:
                 value_count_list[item_pos]['%s far_above_avg_storm_count' % data_name[item_pos]] += 1
             else:
                 value_count_list[item_pos]['%s above_38_count' % data_name[item_pos]] += 1
