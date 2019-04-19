@@ -124,43 +124,44 @@ def dataParser(usgs_geo_data):
         #
         # https://github.com/peschpit-enterprises/Geoff-Big-Data/compare/5a93c4936aeb...dc1b344c4b8e
 
-        value_list = [dst_value, hon_value, sjg_value]
-        value_count_list = [dst_data, hon_data, sjg_data]
-        data_name = ['dst', 'hon', 'sjg']
+    value_data_list = [dst_data, hon_data, sjg_data]
+    value_list_of_lists = [dst_list, hon_list, sjg_list]
+    data_name = ['dst', 'hon', 'sjg']
 
-        for value in value_list:
-            item_pos = value_list.index(value)
-            if len(value_count_list[item_pos]) == 0:
-                value_count_list[item_pos]['%s super_storm_count' % data_name[item_pos]] = 0
-                value_count_list[item_pos]['%s intense_storm_count' % data_name[item_pos]] = 0
-                value_count_list[item_pos]['%s moderate_storm_count' % data_name[item_pos]] = 0
-                value_count_list[item_pos]['%s weak_storm_count' % data_name[item_pos]] = 0
-                value_count_list[item_pos]['%s below_avg_storm_count' % data_name[item_pos]] = 0
-                value_count_list[item_pos]['%s avg_storm_count' % data_name[item_pos]] = 0
-                value_count_list[item_pos]['%s above_avg_storm_count' % data_name[item_pos]] = 0
-                value_count_list[item_pos]['%s far_above_avg_storm_count' % data_name[item_pos]] = 0
-                value_count_list[item_pos]['%s above_38_count' % data_name[item_pos]] = 0
+    for value_array in value_list_of_lists:
+        item_pos = value_list_of_lists.index(value_array)
+        for value in value_array:
+            if len(value_data_list[item_pos]) == 0:
+                value_data_list[item_pos]['%s super_storm_count' % data_name[item_pos]] = 0
+                value_data_list[item_pos]['%s intense_storm_count' % data_name[item_pos]] = 0
+                value_data_list[item_pos]['%s moderate_storm_count' % data_name[item_pos]] = 0
+                value_data_list[item_pos]['%s weak_storm_count' % data_name[item_pos]] = 0
+                value_data_list[item_pos]['%s below_avg_storm_count' % data_name[item_pos]] = 0
+                value_data_list[item_pos]['%s avg_storm_count' % data_name[item_pos]] = 0
+                value_data_list[item_pos]['%s above_avg_storm_count' % data_name[item_pos]] = 0
+                value_data_list[item_pos]['%s far_above_avg_storm_count' % data_name[item_pos]] = 0
+                value_data_list[item_pos]['%s above_38_count' % data_name[item_pos]] = 0
 
             if value < -250:
-                value_count_list[item_pos]['%s super_storm_count' % data_name[item_pos]] += 1
+                value_data_list[item_pos]['%s super_storm_count' % data_name[item_pos]] += 1
             elif -100 > value >= -250:
-                value_count_list[item_pos]['%s intense_storm_count' % data_name[item_pos]] += 1
+                value_data_list[item_pos]['%s intense_storm_count' % data_name[item_pos]] += 1
             elif -49 > value >= -100:
-                value_count_list[item_pos]['%s moderate_storm_count' % data_name[item_pos]] += 1
+                value_data_list[item_pos]['%s moderate_storm_count' % data_name[item_pos]] += 1
             elif -29 > value >= -49:
-                value_count_list[item_pos]['%s weak_storm_count' % data_name[item_pos]] += 1
+                value_data_list[item_pos]['%s weak_storm_count' % data_name[item_pos]] += 1
             elif -9 > value >= -29:
-                value_count_list[item_pos]['%s below_avg_storm_count' % data_name[item_pos]] += 1 
+                value_data_list[item_pos]['%s below_avg_storm_count' % data_name[item_pos]] += 1 
             elif 11 > value >= -9:
-                value_count_list[item_pos]['%s avg_storm_count' % data_name[item_pos]] += 1
+                value_data_list[item_pos]['%s avg_storm_count' % data_name[item_pos]] += 1
             elif 31 > value >= 11:
-                value_count_list[item_pos]['%s above_avg_storm_count' % data_name[item_pos]] += 1
+                value_data_list[item_pos]['%s above_avg_storm_count' % data_name[item_pos]] += 1
             elif 39 > value >= 31:
-                value_count_list[item_pos]['%s far_above_avg_storm_count' % data_name[item_pos]] += 1
+                value_data_list[item_pos]['%s far_above_avg_storm_count' % data_name[item_pos]] += 1
             else:
-                value_count_list[item_pos]['%s above_38_count' % data_name[item_pos]] += 1
+                value_data_list[item_pos]['%s above_38_count' % data_name[item_pos]] += 1
 
-    for data_dict in value_count_list:
+    for data_dict in value_data_list:
         print '\n'
         for data_point, data_measure in data_dict.iteritems():
             print('%s: %s' % (data_point, str(data_measure)))
